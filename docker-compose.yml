@@ -46,11 +46,11 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "14432:5432"
+      - "13432:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['14000:80']
+    ports: ['13000:80']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
 
   wdb:
