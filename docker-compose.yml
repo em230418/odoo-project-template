@@ -59,6 +59,14 @@ services:
   smtpfake:
     image: mailhog/mailhog
 
+  firefox:
+    image: selenium/standalone-firefox-debug:3.14.0-curium
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - "4444:4444"
+      - "5900:5900"
+
 volumes:
   odoo-web-data:
   odoo-db-data:
