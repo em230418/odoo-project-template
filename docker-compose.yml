@@ -18,6 +18,7 @@ services:
   odoo:
     << : *default-odoo
     depends_on:
+      - firefox
       - db
       - wdb
       - proxy
