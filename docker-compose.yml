@@ -9,6 +9,9 @@ x-default:
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
     - ../../common:/mnt/common:ro
     - ./:/mnt/project:ro
+    - type: bind
+      source: ./host2db.ini
+      target: /var/lib/odoo/host2db.ini
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -24,8 +27,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-d', 'saas',
+    '-i', 'saas_apps_signup',
     ]
 
   odoo-longpolling:
@@ -46,11 +49,11 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "14432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['14000:80']
+    ports: ['80:80']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
 
   wdb:

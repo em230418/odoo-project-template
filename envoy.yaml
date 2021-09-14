@@ -50,7 +50,7 @@ static_resources:
               routes:
               - match: {prefix: /}
                 route: {cluster: target_wdb}
-            - domains: [odoo.*]
+            - domains: [odoo.*, "*.nip.io"]
               name: local_service
               routes:
               - match: {prefix: /longpolling/}
