@@ -4,9 +4,9 @@
 
 Адреса:
 
-- ``saas.127.0.0.1.nip.io <http://saas.127.0.0.1.nip.io>``__ - сам saas
-- ``mail.localhost <http://mail.localhost>``__ - все присыламые от Odoo сообщения скидываются сюда
-- ``wdb.localhost <http://wdb.localhost>``__ - отладчик
+- `saas.127.0.0.1.nip.io <http://saas.127.0.0.1.nip.io>`__ - сам saas
+- `mail.localhost <http://mail.localhost>`__ - все присыламые от Odoo сообщения скидываются сюда
+- `wdb.localhost <http://wdb.localhost>`__ - отладчик
 
 Разворачивание
 --------------
