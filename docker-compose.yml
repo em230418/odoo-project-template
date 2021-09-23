@@ -28,7 +28,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'saas',
-    '-i', 'saas_apps_signup',
+    '-i', 'saas_domain_names',
     ]
 
   odoo-longpolling:
