@@ -26,7 +26,8 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-u', 'sync_whatsapp',
+    '--log-handler=odoo.addons.sync_whatsapp:DEBUG',
     ]
 
   odoo-longpolling:
@@ -61,17 +62,21 @@ services:
     image: mailhog/mailhog
 
   firefox:
-    build: ./sync_whatsapp_service
+    build: ./src/whatsapp-api-service
     volumes:
       - /dev/shm:/dev/shm
+      - firefox-profile-data:/opt/firefox-profiles
     ports:
       - "4444:4444"
       - "5900:5900"
       - "5000:5000"
     environment:
       - API_KEY=SECRET_API_KEY
+      - FLASK_ENV=development
+      - FIREFOX_PROFILE_DIR=/opt/firefox-profiles
 
 
 volumes:
   odoo-web-data:
   odoo-db-data:
+  firefox-profile-data:
