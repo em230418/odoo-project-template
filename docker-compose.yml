@@ -61,15 +61,13 @@ services:
     image: mailhog/mailhog
 
   firefox:
-    build: ./sync_whatsapp_service
-    volumes:
-      - /dev/shm:/dev/shm
+    image: selenium/standalone-firefox-debug:3.14.0-curium  # из документации самой библиотеки
+#    image: selenium/standalone-firefox-debug:3.141.59-20210830  # более свежая версия
+
     ports:
       - "4444:4444"
       - "5900:5900"
       - "5000:5000"
-    environment:
-      - API_KEY=SECRET_API_KEY
 
 
 volumes:
