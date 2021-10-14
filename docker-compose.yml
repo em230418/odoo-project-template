@@ -50,7 +50,7 @@ services:
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['13000:80']
+    ports: ['80:80']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
 
   wdb:
