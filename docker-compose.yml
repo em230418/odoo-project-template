@@ -16,8 +16,36 @@ x-default:
   environment:
     - WDB_SOCKET_SERVER=wdb
     - WDB_NO_BROWSER_AUTO_OPEN=True
+    - SAAS_TEST_REMOTE_INSTANCE_URL=http://remote:8069
+    - SAAS_TEST_REMOTE_MASTER_PWD=admin
 
 services:
+  test:
+    << : *default-odoo
+    depends_on:
+      - remote
+      - db
+      - wdb
+      - proxy
+      - odoo-longpolling
+      - smtpfake
+    command: [
+    '--db-filter', '.*',
+    '--workers', '0',
+    '-d', 'saas_test',
+    '-i', 'saas_cluster_simple',
+    '--stop-after-init',
+#    '--test-enable',
+    ]
+
+  remote:
+    << : *default-odoo
+    depends_on:
+      - db
+    command: [
+    '--load', 'base,web,host2db,saas_cluster_simple',
+    ]
+
   odoo:
     << : *default-odoo
     depends_on:
@@ -28,7 +56,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'saas',
-    '-i', 'saas_domain_names',
+    '-i', 'saas_cluster_simple',
     ]
 
   odoo-longpolling:
