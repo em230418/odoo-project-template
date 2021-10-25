@@ -24,8 +24,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-d', 'fiolina',
+    '-i', 'fiolina_reports',
     ]
 
   odoo-longpolling:
