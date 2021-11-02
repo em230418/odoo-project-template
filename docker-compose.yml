@@ -9,6 +9,7 @@ x-default:
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
     - ../../common:/mnt/common:ro
     - ./:/mnt/project:ro
+    - ./src/home/:/home:ro
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -19,14 +20,12 @@ services:
     << : *default-odoo
     depends_on:
       - db
-      - wdb
-      - proxy
-      - odoo-longpolling
-      - smtpfake
-    command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
-    ]
+#      - wdb
+#      - proxy
+#      - odoo-longpolling
+#      - smtpfake
+    ports:
+      - "11069:8069"
 
   odoo-longpolling:
     << : *default-odoo
@@ -34,10 +33,9 @@ services:
       - db
       - wdb
       - proxy
-    command: ['odoo', 'gevent', '--dev', 'reload,qweb,werkzeug,xml']
 
   db:
-    image: postgres:10
+    image: postgres:10.7
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo
