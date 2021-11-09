@@ -50,7 +50,7 @@ static_resources:
               routes:
               - match: {prefix: /}
                 route: {cluster: target_wdb}
-            - domains: [odoo.*]
+            - domains: [odoo.*, "test.eugenemolotov.ru"]
               name: local_service
               routes:
               - match: {prefix: /longpolling/}
