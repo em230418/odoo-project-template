@@ -26,6 +26,7 @@ services:
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'fiolina',
     '-i', 'fiolina_reports',
+    '--load-language', 'ru_RU',
     ]
 
   odoo-longpolling:
