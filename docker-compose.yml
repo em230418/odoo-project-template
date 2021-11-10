@@ -24,8 +24,9 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-d', 'hgc3',
+    '-i', 'hgc_integration',
+    '--log-handler=odoo.addons.hgc_integration:DEBUG',
     ]
 
   odoo-longpolling:
