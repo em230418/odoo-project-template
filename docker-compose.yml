@@ -25,7 +25,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'backport',
-    '-i', 'sync',
+    '-i', 'multi_livechat',
     ]
 
   odoo-longpolling:
