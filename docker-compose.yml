@@ -18,7 +18,7 @@ services:
   odoo:
     << : *default-odoo
     depends_on:
-      - firefox
+#      - firefox
       - db
       - wdb
       - proxy
@@ -29,6 +29,8 @@ services:
     '-u', 'sync_whatsapp',
     '--log-handler=odoo.addons.sync_whatsapp:DEBUG',
     ]
+    extra_hosts:
+      - "firefox:host-gateway"
 
   odoo-longpolling:
     << : *default-odoo
@@ -48,11 +50,11 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "14432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['14000:80']
+    ports: ['80:80']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
 
   wdb:
@@ -60,21 +62,6 @@ services:
 
   smtpfake:
     image: mailhog/mailhog
-
-  firefox:
-    build: ./src/whatsapp-api-service
-    volumes:
-      - /dev/shm:/dev/shm
-      - firefox-profile-data:/opt/firefox-profiles
-    ports:
-      - "4444:4444"
-      - "5900:5900"
-      - "5000:5000"
-    environment:
-      - API_KEY=SECRET_API_KEY
-      - FLASK_ENV=development
-      - FIREFOX_PROFILE_DIR=/opt/firefox-profiles
-
 
 volumes:
   odoo-web-data:
