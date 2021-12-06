@@ -22,11 +22,13 @@ services:
       - wdb
       - proxy
       - odoo-longpolling
-      - smtpfake
+      # - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-d', 'bratan',
+    '-i', 'pos_send_receipt_instagram',
     ]
+    extra_hosts:
+      - "firefox:host-gateway"
 
   odoo-longpolling:
     << : *default-odoo
@@ -46,7 +48,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "11432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
