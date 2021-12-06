@@ -25,7 +25,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'fiolina',
-    '-i', 'fiolina_reports',
+    '-i', 'fiolina_reports,fiolina_purchase,fiolina_account',
     '--load-language', 'ru_RU',
     ]
 
