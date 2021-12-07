@@ -25,7 +25,7 @@ services:
       # - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'bratan',
-    '-i', 'pos_send_receipt_instagram',
+    '-i', 'pos_instagram_send_receipt',
     ]
     extra_hosts:
       - "firefox:host-gateway"
