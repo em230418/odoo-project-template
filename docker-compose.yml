@@ -24,9 +24,11 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
+#    '-d', 'ostrea',
+#    '-i', 'l10n_fr_state,odoo_website_sale_checkout_store,website_country_filter',
     ]
+    ports:
+      - "8069:8069"
 
   odoo-longpolling:
     << : *default-odoo
@@ -46,7 +48,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "14432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
