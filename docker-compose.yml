@@ -24,8 +24,10 @@ services:
       - odoo-longpolling
       # - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'bratan',
-    '-i', 'pos_instagram_send_receipt',
+#    '-d', 'bratan',
+#    '-i', 'pos_instagram_send_receipt,instagram_send_contact_data',
+    '-d', 'tugs',
+    '-i', 'pos_multi_session,pos_multi_session_sync',
     ]
     extra_hosts:
       - "firefox:host-gateway"
