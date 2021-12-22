@@ -55,8 +55,8 @@ https://github.com/em230418/odoo-work-environment/
    Host kontabo-tunnel
      User tunnel
      HostName 173.212.204.237
-     RemoteForward 8069 localhost:7069
-     RemoteForward 8072 localhost:7072
+     RemoteForward 7069 localhost:8069
+     RemoteForward 7072 localhost:8072
 
 Запуск odoo
 -----------
