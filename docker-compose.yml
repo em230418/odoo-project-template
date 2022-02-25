@@ -58,6 +58,7 @@ services:
 
   smtpfake:
     image: mailhog/mailhog
+    ports: ["1025:1025"]
 
 volumes:
   odoo-web-data:
