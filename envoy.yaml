@@ -2,6 +2,20 @@ static_resources:
   clusters:
   - connect_timeout: 0.25s
     hosts:
+    - socket_address: {address: remote, port_value: 8069}
+    lb_policy: round_robin
+    max_requests_per_connection: 1
+    name: target_remote
+    type: strict_dns
+  - connect_timeout: 0.25s
+    hosts:
+    - socket_address: {address: remote, port_value: 8072}
+    lb_policy: round_robin
+    max_requests_per_connection: 1
+    name: target_remote_longpolling
+    type: strict_dns
+  - connect_timeout: 0.25s
+    hosts:
     - socket_address: {address: odoo, port_value: 8069}
     lb_policy: round_robin
     max_requests_per_connection: 1
@@ -50,7 +64,7 @@ static_resources:
               routes:
               - match: {prefix: /}
                 route: {cluster: target_wdb}
-            - domains: [odoo.*, "*.nip.io", "*.nip.io:8069"]
+            - domains: [odoo.*, "*.127.0.0.1.nip.io", "*.127.0.0.1.nip.io:8069"]
               name: local_service
               routes:
               - match: {prefix: /longpolling/}
@@ -61,6 +75,19 @@ static_resources:
               - match: {prefix: /}
                 route: {
                     cluster: target_odoo,
+                    timeout: 720s
+                }
+            - domains: ["*.127.0.0.2.nip.io", "*.127.0.0.2.nip.io:8069"]
+              name: remote_service
+              routes:
+              - match: {prefix: /longpolling/}
+                route: {
+                  cluster: target_remote_longpolling,
+                  timeout: 60s
+                }
+              - match: {prefix: /}
+                route: {
+                    cluster: target_remote,
                     timeout: 720s
                 }
           stat_prefix: ingress_http

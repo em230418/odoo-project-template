@@ -56,7 +56,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'saas',
-    '-i', 'saas_cluster_simple',
+    '-i', 'saas_backups',
     ]
 
   odoo-longpolling:
