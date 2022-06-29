@@ -9,6 +9,7 @@ x-default:
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
     - ../../common:/mnt/common:ro
     - ./:/mnt/project:ro
+    - ../adrian15/src/addons:/mnt/adrian-addons:ro
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -24,9 +25,12 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-d', 'dev9',
+    '-i', 'sync_whatsapp_maytapi',
+    '--log-handler=odoo.addons.sync_whatsapp_maytapi:DEBUG',
     ]
+    ports:
+      - "8069:8069"
 
   odoo-longpolling:
     << : *default-odoo
@@ -46,7 +50,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "15432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
