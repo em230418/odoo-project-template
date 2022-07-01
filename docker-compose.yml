@@ -25,8 +25,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev9',
-    '-i', 'sync_whatsapp_maytapi',
+    '-d', 'dev11',
+    '-i', 'contacts_3cx',
     '--log-handler=odoo.addons.sync_whatsapp_maytapi:DEBUG',
     ]
     ports:
