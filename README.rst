@@ -22,12 +22,11 @@ https://github.com/em230418/odoo-work-environment/
 
    mkdir it-projects
    git clone -b 12.0 --single-branch -o upstream git@gitlab.com:itpp/dev/pos-addons.git
-   git clone -b 12.0 --single-branch -o upstream git@gitlab.com:itpp/pp/Gladkevich.git extra-addons
+   git clone -b master --single-branch -o upstream git@gitlab.com:itpp/pp/Gladkevich.git extra-addons
    cd ..
 
    mkdir OCA
    cd OCA
-   git clone -b 12.0 --single-branch -o upstream git@github.com:OCA/server-ux.git
    git clone -b 12.0 --single-branch -o upstream git@github.com:OCA/server-ux.git
    git clone -b 12.0 --single-branch -o upstream git@github.com:OCA/server-tools.git
    git clone -b 12.0 --single-branch -o upstream git@github.com:OCA/product-attribute.git
