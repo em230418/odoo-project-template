@@ -13,6 +13,7 @@ x-default:
   environment:
     - WDB_SOCKET_SERVER=wdb
     - WDB_NO_BROWSER_AUTO_OPEN=True
+    - ALL_PROXY=socks5://172.17.0.1:3128
 
 services:
   odoo:
@@ -24,9 +25,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'hgc3',
-    '-i', 'hgc_integration',
-    '--log-handler=odoo.addons.hgc_integration:DEBUG',
+    '-d', 'fromzero2',
+    '-i', 'corvette_pos_invoice_report',
     ]
 
   odoo-longpolling:
@@ -47,7 +47,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "14432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
