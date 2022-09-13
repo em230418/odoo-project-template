@@ -25,7 +25,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-i', 'limitless_sale,limitless_website_sale',
     ]
 
   odoo-longpolling:
