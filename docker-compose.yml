@@ -8,7 +8,7 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
     - ../../common:/mnt/common:ro
-    - ./:/mnt/project:ro
+    - ./:/mnt/project
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -25,8 +25,13 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
-    '-i', 'limitless_sale,limitless_website_sale',
+#    '-i', 'limitless_base,limitless_sale,limitless_website,limitless_website_sale',
+    '-u', 'limitless_website_sale',
+    '--log-handler', 'odoo.addons.payment_datatrans:DEBUG',
+    '--log-handler', 'odoo.addons.limitless_website_sale:DEBUG',
     ]
+    ports:
+      - "8069:8069"
 
   odoo-longpolling:
     << : *default-odoo
