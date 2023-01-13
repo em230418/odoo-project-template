@@ -6,7 +6,7 @@ x-default:
   build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
-    - ./odoo.conf:/etc/odoo/odoo.conf:ro
+    - ./odoo.conf:/etc/odoo/openerp-server.conf:ro
     - ../../common:/mnt/common:ro
     - ./:/mnt/project:ro
 
@@ -23,8 +23,7 @@ services:
       - proxy
       - odoo-longpolling
       - smtpfake
-    command: ['--dev', 'reload,qweb,werkzeug,xml',
-    ]
+    command: ['odoo']
 
   odoo-longpolling:
     << : *default-odoo
@@ -32,7 +31,7 @@ services:
       - db
       - wdb
       - proxy
-    command: ['odoo', 'gevent', '--dev', 'reload,qweb,werkzeug,xml']
+    command: ['odoo', 'gevent']
 
   db:
     image: postgres:10
