@@ -33,11 +33,12 @@ services:
     depends_on:
       - db
       - wdb
-      - proxy
-    command: ['odoo', 'gevent', '--dev', 'reload,qweb,werkzeug,xml']
+    command: ['odoo', 'gevent', '--dev', 'reload'] #,qweb,werkzeug,xml']
+    ports:
+      - "127.0.0.16:8072:8072"
 
   db:
-    image: postgres:10
+    image: postgres:13
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo
@@ -46,7 +47,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "15432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0

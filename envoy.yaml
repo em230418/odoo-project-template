@@ -53,10 +53,10 @@ static_resources:
             - domains: [odoo.*]
               name: local_service
               routes:
-              - match: {prefix: /longpolling/}
+              - match: {prefix: /websocket}
                 route: {
                   cluster: target_odoo_longpolling,
-                  timeout: 60s
+                  timeout: 720s
                 }
               - match: {prefix: /}
                 route: {
