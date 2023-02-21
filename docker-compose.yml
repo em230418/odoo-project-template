@@ -3,7 +3,6 @@ version: '3.4'
 x-default:
   &default-odoo
   tty: true
-  build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
@@ -17,6 +16,7 @@ x-default:
 services:
   odoo:
     << : *default-odoo
+    build: .
     depends_on:
       - db
       - wdb
@@ -25,19 +25,20 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-u', 'posdotcom_secondary_language',
     ]
 
   odoo-longpolling:
     << : *default-odoo
+    image: my/odoo:16.0
     depends_on:
       - db
       - wdb
       - proxy
-    command: ['odoo', 'gevent', '--dev', 'reload,qweb,werkzeug,xml']
+    command: ['odoo', 'gevent', '--dev', 'reload', '--addons-path', '/mnt/common/odoo/odoo/addons']
 
   db:
-    image: postgres:10
+    image: postgres:13
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo
@@ -46,7 +47,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "15432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
