@@ -24,10 +24,12 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'fiolina',
-    '-i', 'fiolina_reports,fiolina_purchase,fiolina_account',
-    '--load-language', 'ru_RU',
+#    '-d', 'fiolina',
+#    '-i', 'fiolina_reports,fiolina_purchase,fiolina_account',
+#    '--load-language', 'ru_RU',
     ]
+    ports:
+       - "8069:8069"
 
   odoo-longpolling:
     << : *default-odoo
@@ -47,7 +49,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "13432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
