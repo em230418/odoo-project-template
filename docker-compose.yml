@@ -24,8 +24,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'posdotcom_reprint_last_receipt',
+    '-d', 'dev_posdotcom_product_additional_fee',
+    '-i', 'posdotcom_product_additional_fee',
     ]
 
   odoo-longpolling:
