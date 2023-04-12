@@ -3,7 +3,6 @@ version: '3.4'
 x-default:
   &default-odoo
   tty: true
-  build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
@@ -17,6 +16,7 @@ x-default:
 services:
   odoo:
     << : *default-odoo
+    build: .
     depends_on:
       - db
       - wdb
@@ -25,16 +25,17 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'bacula',
-    '-i', 'bacula_reports,bacula_sale_subscription',
+    '-i', 'bacula_sale',
     ]
 
   odoo-longpolling:
     << : *default-odoo
+    image: odoo:13.0
     depends_on:
       - db
       - wdb
       - proxy
-    command: ['odoo', 'gevent', '--dev', 'reload,qweb,werkzeug,xml']
+    command: ['odoo', 'gevent', '--dev', 'reload', '--addons-path', '/mnt/common/odoo/odoo/addons']
 
   db:
     image: postgres:10
