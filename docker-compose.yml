@@ -25,7 +25,8 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
-    '-u', 'tc_project,tc_livechat,tc_telegram',
+    '-i', 'sync_whatsapp',
+#    '-u', 'tc_project,tc_livechat,tc_telegram',
     ]
     ports:
       - "8069:8069"
