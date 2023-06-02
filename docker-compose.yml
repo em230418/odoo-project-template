@@ -26,7 +26,8 @@ services:
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
 #    '-i', 'limitless_base,limitless_sale,limitless_website,limitless_website_sale',
-    '-u', 'limitless_website_sale',
+    '-u', 'limitless_portal',
+#    '--log-handler', 'odoo.sql_db:DEBUG',
     '--log-handler', 'odoo.addons.payment_datatrans:DEBUG',
     '--log-handler', 'odoo.addons.limitless_website_sale:DEBUG',
     ]
