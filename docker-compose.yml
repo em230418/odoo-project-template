@@ -25,7 +25,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
-    '-u', 'posdotcom_secondary_language',
+    '-i', 'bacula_reports',
     ]
 
   odoo-longpolling:
