@@ -3,7 +3,6 @@ version: '3.4'
 x-default:
   &default-odoo
   tty: true
-  build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
@@ -17,6 +16,7 @@ x-default:
 services:
   odoo:
     << : *default-odoo
+    build: .
     depends_on:
       - db
       - wdb
@@ -25,9 +25,13 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'dev',
+    '-i', 'limitless_portal',
 #    '-i', 'limitless_base,limitless_sale,limitless_website,limitless_website_sale',
-    '-u', 'limitless_portal',
+#    '-u', 'limitless_portal',
 #    '--log-handler', 'odoo.sql_db:DEBUG',
+#    '-u', 'limitless_portal',
+#    '-d', 'master',
+#    '-i', 'limitless_website_sale',
     '--log-handler', 'odoo.addons.payment_datatrans:DEBUG',
     '--log-handler', 'odoo.addons.limitless_website_sale:DEBUG',
     ]
@@ -36,6 +40,7 @@ services:
 
   odoo-longpolling:
     << : *default-odoo
+    image: "odoo:15.0"
     depends_on:
       - db
       - wdb
