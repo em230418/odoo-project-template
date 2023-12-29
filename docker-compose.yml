@@ -24,9 +24,11 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
-#    '-u', 'tc_project,tc_livechat,tc_telegram',
+    '-d', 'dev2',
+    '-i', 'tc_whatsapp',
+    '-u', 'tc_mass_mailing,tc_whatsapp',
+#    '--log-handler=odoo.addons.queue_job:DEBUG',
+    '--log-handler=odoo.addons.sync_whatsapp:DEBUG',
     ]
     ports:
       - "8069:8069"
