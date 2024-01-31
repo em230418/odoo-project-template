@@ -3,7 +3,8 @@ version: '3.4'
 x-default:
   &default-odoo
   tty: true
-  build: .
+  # build: .
+  image: my/odoo:15.0
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./odoo.conf:/etc/odoo/odoo.conf:ro
@@ -24,8 +25,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-i', 'sync_whatsapp',
+    '-d', 'dev2',
+    '-i', 'project_timesheet_time_control',
     ]
 
   odoo-longpolling:
@@ -46,7 +47,7 @@ services:
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
     ports:
-      - "15432:5432"
+      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
