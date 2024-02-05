@@ -24,8 +24,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'dev',
-    '-u', 'posdotcom_secondary_language',
+    '-d', 'dev2',
+    '-i', 'faraj_sign,faraj_sale',
     ]
 
   odoo-longpolling:
