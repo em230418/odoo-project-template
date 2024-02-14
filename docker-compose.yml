@@ -30,7 +30,7 @@ services:
 
   odoo-longpolling:
     << : *default-odoo
-    image: my/odoo:16.0
+    image: my/odoo:17.0
     depends_on:
       - db
       - wdb
