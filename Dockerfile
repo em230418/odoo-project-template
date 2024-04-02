@@ -3,5 +3,7 @@ USER root
 RUN python3 -m pip install "python-telegram-bot<20"
 RUN python3 -m pip install facebook_business
 RUN python3 -m pip install requests[socks]
-# RUN python3 -m pip install cryptography
+RUN python3 -m pip install websocket-client
+RUN apt-get update && apt-get install -y texlive-lang-cyrillic texlive-latex-extra
+
 USER odoo
