@@ -24,6 +24,14 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
+#'-d', 'tribalgathering-staging-050224-11618470',
+#'-i', 'pos_esign_event_registration',
+#'-d', 'dev20240320_tg_pos',
+#'-u', 'tg_pos',
+#'-d', 'dev_pos_debt_notebook',
+'-i', 'pos_debt_notebook',
+#'-d', 'event_guest_db2',
+#'-i', 'tg_event_guest,portal_passport_editing',
     ]
     ports:
       - "8069:8069"
