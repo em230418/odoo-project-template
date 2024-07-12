@@ -24,10 +24,11 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-#    '-d', 'prod5',
-    '-d', 'dev3',
-    '-i', 'tc_base,tc_base_import',
- #   '-u', 'tc_base',
+    '-d', 'prod6',
+#    '-d', 'dev3',
+#    '-u', 'tc_web,tc_mail,tc_base',
+    '-u', 'tc_mass_mailing',
+#    '-i', 'tc_reports',
 #    '-i', 'payment_nexiit',
 #    '--log-handler=odoo.addons.queue_job:DEBUG',
     '--log-handler=odoo.addons.sync_whatsapp:DEBUG',
