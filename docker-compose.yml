@@ -14,6 +14,20 @@ x-default:
     - WDB_NO_BROWSER_AUTO_OPEN=True
 
 services:
+  matrix-bot:
+    build:
+      context: ./src/addons/mail_matrix/matrix-bot
+      target: dev
+    volumes:
+      - ./src/addons/mail_matrix/matrix-bot:/app
+    env_file: ".env.matrixbot"
+    environment:
+      - WDB_SOCKET_SERVER=wdb
+      - WDB_NO_BROWSER_AUTO_OPEN=True
+      - ODOO_ENDPOINT=http://odoo:8069
+    depends_on:
+      - odoo
+
   odoo:
     << : *default-odoo
     build: .
@@ -24,13 +38,26 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'prod6',
-#    '-d', 'dev3',
+#    '-d', 'prod6',
+#    '-d', 'dev1779',
+#'-d', 'dev286',
+#'-d', 'dev1828',
+#'-d', 'prod1778',
+#'-d', 'dev1721',
+#'-d', 'dev1969',
+#'-d', 'prod1969',
+'-d', 'prod20240930',
+#'-d', 'prod1721',
 #    '-u', 'tc_web,tc_mail,tc_base',
-    '-u', 'tc_mass_mailing',
-#    '-i', 'tc_reports',
+#    '-u', 'tc_mass_mailing',
+#    '-u', 'tc_reports', #mass_mailing',
+#'-u', 'base', #,tc_event_sale',
+#'-u', 'base',
+#'-u', 'tc_base,tc_reports',
+#'-i', 'tc_sale',
 #    '-i', 'payment_nexiit',
 #    '--log-handler=odoo.addons.queue_job:DEBUG',
+'-u', 'tc_event_sale',
     '--log-handler=odoo.addons.sync_whatsapp:DEBUG',
     ]
     ports:
@@ -64,9 +91,39 @@ services:
 
   wdb:
     image: kozea/wdb:3.3.0
+    init: true
+    ports: ['19840:19840']
 
   smtpfake:
     image: mailhog/mailhog
+
+  odoo2:
+    << : *default-odoo
+    build: .
+    depends_on:
+      - db
+    command: ['--dev', 'reload,qweb,werkzeug,xml',
+#    '-d', 'prod6',
+#    '-d', 'dev1779',
+#'-d', 'dev286',
+#'-d', 'dev1828',
+#'-d', 'prod1778',
+#'-d', 'dev1721',
+#'-d', 'dev1969',
+'-d', 'prod20240911',
+#'-d', 'prod1721',
+#    '-u', 'tc_web,tc_mail,tc_base',
+#    '-u', 'tc_mass_mailing',
+#'-u', 'base', #,tc_event_sale',
+#'-u', 'base',
+#'-u', 'tc_mass_mailing',
+#'-i', 'tc_sale',
+#    '-i', 'payment_nexiit',
+#    '--log-handler=odoo.addons.queue_job:DEBUG',
+#    '--log-handler=odoo.addons.sync_whatsapp:DEBUG',
+    ]
+    ports:
+      - "6366:8069"
 
 volumes:
   odoo-web-data:
