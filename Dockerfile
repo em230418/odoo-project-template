@@ -1,4 +1,4 @@
-FROM my/odoo:15.0
+FROM odoo:15.0
 USER root
-# RUN python3 -m pip install cryptography
+RUN apt-get update && apt-get install -y python3-sentry-sdk
 USER odoo
